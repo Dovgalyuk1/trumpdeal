@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TRUMPDEAL — The Greatest Deal Ever Made</title>
+<meta name="description" content="He claimed himself, then sold himself back to America. Lot 001, previously owned by nobody.">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:title" content="TRUMPDEAL — The Greatest Deal Ever Made">
+<meta property="og:description" content="He claimed himself, then sold himself back to America.">
+<meta property="og:image" content="assets/cut-full.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4ecd8; --paper2:#ece1c6; --ink:#191309; --ink2:#4a3c22;
+  --red:#d8232a; --red2:#9a1219; --blue:#1d3f74; --gold:#e8b62c;
+  --tag:#ffd23d; --line:rgba(25,19,9,.22);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Space Mono",ui-monospace,Menlo,monospace;
+  overflow-x:clip; -webkit-text-size-adjust:100%;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px);
+  background-size:100% 34px;
+}
+.grain{position:fixed; inset:0; pointer-events:none; z-index:2; opacity:.13; mix-blend-mode:multiply;
+  background-image:radial-gradient(rgba(60,40,10,.9) .5px,transparent .6px); background-size:3px 3px}
+.vig{position:fixed; inset:0; pointer-events:none; z-index:2;
+  background:radial-gradient(ellipse at 50% 40%, #0000 55%, rgba(40,25,5,.22) 100%)}
+img{max-width:100%}
+h1,h2,h3,.slab{font-family:"Alfa Slab One",Georgia,serif; font-weight:400; letter-spacing:.01em}
+
+/* ---------- gate ---------- */
+#gate{position:fixed; inset:0; z-index:200; background:var(--red);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:26px; text-align:center; padding:24px}
+#gate .lot{font-size:12px; letter-spacing:.28em; color:#ffdede}
+#gate h1{font-size:clamp(30px,8vw,74px); color:var(--paper); margin:0; line-height:.98;
+  text-shadow:5px 5px 0 var(--ink)}
+#gate p{max-width:540px; font-size:14px; line-height:1.7; color:#ffe9e9; margin:0}
+#enter{cursor:pointer; background:var(--tag); color:var(--ink); border:3px solid var(--ink);
+  font-family:"Alfa Slab One",serif; font-size:clamp(17px,3.4vw,25px); padding:16px 30px;
+  box-shadow:0 7px 0 var(--ink); border-radius:3px}
+#enter:active{transform:translateY(4px); box-shadow:0 3px 0 var(--ink)}
+@keyframes shake{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+#gate .hand{font-size:44px; animation:shake .7s ease-in-out infinite}
+
+/* ---------- hud / bar ---------- */
+#hud{position:fixed; right:10px; top:10px; z-index:120; display:flex; gap:6px}
+#hud button{font-family:"Space Mono",monospace; font-size:10px; letter-spacing:.1em; cursor:pointer;
+  background:var(--paper); color:var(--ink); border:2px solid var(--ink); padding:7px 9px; box-shadow:3px 3px 0 var(--ink)}
+#hud button:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink)}
+#bar{position:sticky; top:0; z-index:110; background:var(--ink); color:var(--paper);
+  display:flex; justify-content:center; gap:18px; flex-wrap:wrap; padding:7px 12px; font-size:11px; letter-spacing:.14em}
+#bar b{color:var(--tag)}
+#mq{background:var(--red); color:var(--paper); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink);
+  overflow:hidden; white-space:nowrap; position:relative; z-index:5}
+#mq span{display:inline-block; padding:9px 0; font-size:12px; letter-spacing:.2em; animation:mq 34s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:5}
+section{position:relative; z-index:5}
+.eyebrow{font-size:11px; letter-spacing:.26em; color:var(--red2); font-weight:700}
+.rule{height:3px; background:var(--ink); margin:16px 0}
+.dots{border-bottom:2px dashed var(--line); margin:14px 0}
+
+/* ---------- hero ---------- */
+#hero{padding:44px 0 30px}
+.hero-in{display:grid; grid-template-columns:1.05fr .95fr; gap:36px; align-items:center}
+.hero-in>div{min-width:0}
+.wordmark{font-size:clamp(38px,7.1vw,86px); line-height:.9; margin:8px 0 6px; color:var(--red);
+  text-shadow:5px 5px 0 var(--ink), 10px 10px 0 rgba(25,19,9,.22)}
+.sub{font-family:"Alfa Slab One",serif; font-size:clamp(15px,2.7vw,26px); color:var(--ink); line-height:1.15; margin:6px 0 14px}
+.slogan{font-size:15px; line-height:1.6; margin:0 0 14px; color:var(--ink2)}
+.lore p{font-size:14.5px; line-height:1.78; margin:0 0 12px}
+.btns{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 12px}
+.btn{display:inline-flex; align-items:center; gap:8px; cursor:pointer; text-decoration:none;
+  font-family:"Alfa Slab One",serif; font-size:15px; padding:13px 20px; border:3px solid var(--ink);
+  background:var(--tag); color:var(--ink); box-shadow:0 6px 0 var(--ink)}
+.btn:active{transform:translateY(3px); box-shadow:0 3px 0 var(--ink)}
+.btn.alt{background:var(--paper)}
+.btn.soon{background:#cfc6ae; color:#7d7259; cursor:default; box-shadow:0 6px 0 #7d7259; border-color:#7d7259}
+.btn.soon:active{transform:none; box-shadow:0 6px 0 #7d7259}
+#caBox{display:inline-flex; align-items:center; gap:9px; cursor:pointer; background:var(--paper2);
+  border:2px dashed var(--ink); padding:9px 13px; font-size:11.5px; letter-spacing:.06em; margin-top:6px}
+#caBox b{color:var(--red2)}
+
+/* listing card */
+.listing{position:relative; background:var(--paper2); border:3px solid var(--ink); box-shadow:9px 9px 0 var(--ink);
+  padding:16px 16px 14px}
+.listing .head{display:flex; justify-content:space-between; font-size:10.5px; letter-spacing:.16em; margin-bottom:8px}
+#portrait{position:relative; background:
+  repeating-linear-gradient(45deg,#e6dabb 0 12px,#e0d2af 12px 24px); border:2px solid var(--ink); overflow:hidden;
+  display:flex; align-items:flex-end; justify-content:center; cursor:pointer; min-height:270px}
+#portrait img{width:78%; height:auto; display:block; filter:drop-shadow(0 12px 10px rgba(25,19,9,.3));
+  animation:bob 2.6s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-9px)}}
+#drop{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+.pricetag{position:absolute; right:10px; top:10px; z-index:3; background:var(--tag); border:2px solid var(--ink);
+  padding:7px 11px; transform:rotate(7deg); box-shadow:4px 4px 0 rgba(25,19,9,.5); text-align:center}
+.pricetag i{display:block; font-style:normal; font-size:9px; letter-spacing:.16em}
+.pricetag b{font-family:"Alfa Slab One",serif; font-size:15px}
+.plaque{margin-top:10px; background:var(--ink); color:var(--tag); text-align:center; padding:7px;
+  font-size:11px; letter-spacing:.16em}
+.gocta{display:block; width:100%; margin-top:10px; cursor:pointer; text-align:center; text-decoration:none;
+  font-family:"Alfa Slab One",serif; font-size:16px; padding:13px; border:3px solid var(--ink);
+  background:var(--red); color:var(--paper); box-shadow:0 6px 0 var(--ink)}
+.gocta:active{transform:translateY(3px); box-shadow:0 3px 0 var(--ink)}
+@keyframes pulse{0%,100%{box-shadow:0 6px 0 var(--ink)}50%{box-shadow:0 6px 0 var(--ink),0 0 0 7px rgba(216,35,42,.22)}}
+.gocta{animation:pulse 1.9s ease-in-out infinite}
+
+/* ---------- game ---------- */
+#game{padding:36px 0 20px}
+.gwrap{background:var(--paper2); border:3px solid var(--ink); box-shadow:11px 11px 0 var(--ink); padding:18px}
+.gtop{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px}
+.stat{background:var(--paper); border:2px solid var(--ink); padding:10px; text-align:center}
+.stat i{display:block; font-style:normal; font-size:9.5px; letter-spacing:.18em; color:var(--ink2)}
+.stat b{font-family:"Alfa Slab One",serif; font-size:clamp(15px,3vw,25px); display:block; line-height:1.15; word-break:break-word}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
+.pop{animation:pop .34s ease}
+.gcols{display:grid; grid-template-columns:1.1fr .9fr; gap:16px}
+.gcols>div{min-width:0}
+.gbtns{display:grid; gap:9px}
+.gb{cursor:pointer; text-align:left; font-family:"Space Mono",monospace; font-weight:700; font-size:13px;
+  background:var(--paper); color:var(--ink); border:3px solid var(--ink); padding:13px 14px; box-shadow:0 5px 0 var(--ink)}
+.gb:active{transform:translateY(3px); box-shadow:0 2px 0 var(--ink)}
+.gb small{display:block; font-weight:400; font-size:10.5px; color:var(--ink2); margin-top:3px}
+.gb[disabled]{background:#d5cbb2; color:#857a60; border-color:#857a60; box-shadow:0 5px 0 #857a60; cursor:default}
+.gb.shake{background:var(--tag)}
+.gb.ready{background:var(--red); color:var(--paper)}
+.gb.ready small{color:#ffdcdc}
+#log{background:var(--paper); border:2px solid var(--ink); padding:12px; height:212px; overflow:auto; font-size:12.4px; line-height:1.62}
+.receipt{margin-top:11px; background:var(--paper); border:2px solid var(--ink); padding:11px 12px}
+.receipt h4{margin:0 0 7px; font-family:"Alfa Slab One",serif; font-size:12px; letter-spacing:.04em}
+.receipt div{display:flex; justify-content:space-between; gap:10px; font-size:11.5px; padding:4px 0; border-bottom:1px dashed var(--line)}
+.receipt div:last-child{border-bottom:0}
+.receipt b{color:var(--red2)}
+#log .l{border-bottom:1px dashed var(--line); padding:7px 0}
+#log .l:last-child{border-bottom:0}
+#log .who{color:var(--red2); font-weight:700; font-size:10px; letter-spacing:.14em; display:block}
+.clist{list-style:none; margin:0; padding:0; border:2px solid var(--ink); background:var(--paper)}
+.clist li{border-bottom:1px dashed var(--line); padding:9px 11px; font-size:11.5px; color:#9a8f78; position:relative}
+.clist li:last-child{border-bottom:0}
+.clist li.on{color:var(--ink)}
+.clist li.on::after{content:"AGREED"; position:absolute; right:9px; top:7px; color:var(--red);
+  border:2px solid var(--red); font-size:8.5px; letter-spacing:.1em; padding:2px 5px; transform:rotate(-8deg)}
+.clist li b{font-family:"Alfa Slab One",serif; font-size:12px; display:block}
+
+/* clause cards */
+#terms{padding:24px 0 10px}
+.cards{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+.card{background:var(--paper2); border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink); padding:13px; position:relative; min-width:0}
+.card.locked{color:#9a8f78; background:#e4dac0}
+.card.locked .body{filter:blur(4px); opacity:.5}
+.card .no{font-size:9.5px; letter-spacing:.2em; color:var(--red2)}
+.card h3{font-size:14px; margin:5px 0 8px}
+.card .body{font-size:12.2px; line-height:1.62; margin:0}
+.card .stamp{position:absolute; right:-8px; top:-11px; background:var(--red); color:var(--paper);
+  font-family:"Alfa Slab One",serif; font-size:11px; padding:5px 8px; transform:rotate(9deg); border:2px solid var(--ink); display:none}
+.card.on .stamp{display:block}
+
+/* notes */
+#notes{padding:30px 0}
+.notes{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.note{background:var(--paper2); border:3px solid var(--ink); box-shadow:7px 7px 0 var(--ink); padding:12px; min-width:0}
+.note img{width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border:2px solid var(--ink); background:#e6dabb; display:block}
+.note h3{font-size:14px; margin:10px 0 6px}
+.note p{font-size:12.4px; line-height:1.65; margin:0}
+
+/* paperwork */
+#paper{padding:22px 0 40px}
+.rows{border:3px solid var(--ink); background:var(--paper2)}
+.row{display:grid; grid-template-columns:190px 1fr; gap:14px; padding:15px 16px; border-bottom:2px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.row b{font-family:"Alfa Slab One",serif; font-size:14px; color:var(--red2)}
+.row p{margin:0; font-size:12.8px; line-height:1.7}
+.sign{display:flex; justify-content:space-between; gap:20px; margin-top:18px; flex-wrap:wrap}
+.sign div{flex:1 1 220px; border-top:2px solid var(--ink); padding-top:6px; font-size:10.5px; letter-spacing:.14em; color:var(--ink2)}
+
+footer{background:var(--ink); color:var(--paper); padding:26px 0; font-size:11.5px; letter-spacing:.1em; text-align:center}
+footer a{color:var(--tag)}
+
+/* rain + win */
+.coin{position:absolute; width:30px; height:16px; background:linear-gradient(#bfe3b6,#7fc07a);
+  border:1.5px solid #24501f; border-radius:2px; font-size:9px; color:#24501f; text-align:center; line-height:14px;
+  font-family:"Alfa Slab One",serif}
+#rain{position:fixed; inset:0; pointer-events:none; z-index:140; overflow:hidden}
+#win{position:fixed; inset:0; z-index:150; background:rgba(25,19,9,.86); display:none; align-items:center; justify-content:center; padding:22px}
+#win .card2{background:var(--paper); border:4px solid var(--ink); box-shadow:14px 14px 0 var(--red); max-width:620px; padding:26px; text-align:center; position:relative}
+#win h2{font-size:clamp(24px,6vw,44px); margin:6px 0 8px; color:var(--red); text-shadow:4px 4px 0 var(--ink)}
+#win p{font-size:13.5px; line-height:1.7}
+#win .big{font-family:"Alfa Slab One",serif; font-size:clamp(20px,5vw,38px); background:var(--tag);
+  border:3px solid var(--ink); display:inline-block; padding:9px 16px; margin:10px 0; transform:rotate(-1.5deg)}
+#winClose{margin-top:12px}
+
+@media (max-width:1000px){
+  .hero-in{grid-template-columns:1fr; gap:22px}
+  .hero-in>div:last-child{order:-1}
+  #portrait img{max-height:280px; width:auto}
+  .gcols{grid-template-columns:1fr}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .notes{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  #hud{top:auto; bottom:12px; right:12px}
+  #bar{font-size:10px; gap:12px; letter-spacing:.1em}
+  #bar span:nth-child(2),#bar span:nth-child(4){display:none}
+}
+@media (max-width:560px){
+  .gtop{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr; gap:5px}
+  .wordmark{text-shadow:3px 3px 0 var(--ink)}
+  .listing{box-shadow:6px 6px 0 var(--ink)}
+  .gwrap{box-shadow:6px 6px 0 var(--ink); padding:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+
+<script>
+/* ============ SETTINGS ============ */
+window.CONTRACT = "";      /* адрес контракта */
+window.TWITTER  = "";      /* ссылка на X */
+window.BUY_URL  = "";      /* ссылка на покупку */
+/* ================================== */
+</script>
+
+<div class="grain"></div><div class="vig"></div>
+
+<div id="gate">
+  <div class="lot">LOT No. 001 &middot; ONE (1) PRESIDENT &middot; PREVIOUSLY OWNED BY NOBODY</div>
+  <div class="hand">&#129309;</div>
+  <h1>THE GREATEST<br>DEAL EVER MADE</h1>
+  <p>He found the one thing in this country that nobody had ever claimed, and it was himself. Everything after that was paperwork.</p>
+  <button id="enter">SHAKE ON IT</button>
+</div>
+
+<div id="hud">
+  <button id="sfxBtn">SOUND: ON</button>
+  <button id="musBtn">MUSIC: OFF</button>
+</div>
+
+<div id="bar">
+  <span>LOT 001</span><span>SELLER: HIMSELF</span><span>ASKING PRICE: <b id="barPrice">$3</b></span><span>TERMS: FOREVER</span>
+</div>
+
+<div id="mq"><span id="mqs"></span></div>
+
+<section id="hero"><div class="wrap"><div class="hero-in">
+  <div>
+    <div class="eyebrow">CLAIMED TUESDAY 9:15 AM &middot; SOLD BY LUNCH</div>
+    <h1 class="wordmark">TRUMPDEAL</h1>
+    <div class="sub">HE CLAIMED HIMSELF, THEN SOLD HIMSELF BACK TO AMERICA.</div>
+    <p class="slogan">i found something nobody owned. it was me. so i bought it and sold it to you.</p>
+    <div class="lore">
+      <p>They passed a law saying the president can claim anything in this country that has no owner on the paperwork. I went through the whole list twice, and every single thing already had a name on it, which frankly was disappointing. Then I got to the last line and there it was, the biggest asset in America, sitting there with nobody's name on it at all: me.</p>
+      <p>So I claimed myself on a Tuesday morning while everybody else was still asleep. By lunch I owned me outright, free and clear, no liens, no partners. Then I sold me back to America at a price we both called very fair, and America is still making the payments, and that is why they call it the greatest deal ever made.</p>
+    </div>
+    <div class="btns">
+      <a class="btn soon" id="buyBtn" href="#">BUY $TRUMPDEAL</a>
+      <a class="btn alt xLink" id="xBtn" href="#" target="_blank" rel="noopener">FOLLOW ON X</a>
+      <a class="btn alt" href="#game">SEE THE DEAL</a>
+    </div>
+    <div id="caBox">CONTRACT: <span class="ca-val">live on launch</span> <b>copy</b></div>
+  </div>
+
+  <div>
+    <div class="listing">
+      <div class="head"><span>LISTING 001</span><span id="listState">FOR SALE BY OWNER</span></div>
+      <div id="portrait" title="poke him">
+        <div class="pricetag"><i>ASKING</i><b id="tagPrice">$3</b></div>
+        <img src="assets/cut-full.webp" alt="One (1) president, standing exactly where he was found, still convinced he is worth more than the number on the tag" width="640" height="890">
+        <div id="drop"></div>
+      </div>
+      <div class="plaque">POKE HIM &middot; HE PAYS</div>
+      <a class="gocta" href="#game">MAKE HIM AN OFFER &#8595;</a>
+    </div>
+  </div>
+</div></div></section>
+
+<section id="game"><div class="wrap">
+  <div class="eyebrow">THE MINI GAME</div>
+  <h2 style="font-size:clamp(22px,4.6vw,38px); margin:6px 0 4px">THE NEGOTIATION DESK</h2>
+  <p style="font-size:13px; line-height:1.7; margin:0 0 16px; max-width:720px; color:var(--ink2)">You are America. He is selling you himself. Push back all you want, but every single thing you say moves the price in exactly one direction, and it is not down. Eight rounds, then you shake on it.</p>
+  <div class="gwrap">
+    <div class="gtop">
+      <div class="stat"><i>ROUND</i><b id="sRound">0 / 8</b></div>
+      <div class="stat"><i>HIS PRICE</i><b id="sPrice">$3</b></div>
+      <div class="stat"><i>YOUR LEVERAGE</i><b id="sLev">100%</b></div>
+    </div>
+    <div class="gcols">
+      <div>
+        <div class="gbtns">
+          <button class="gb" id="bToo">1 &middot; &laquo;THAT IS TOO MUCH&raquo;<small>He agrees it is a lot of money, which is how he knows it is correct.</small></button>
+          <button class="gb" id="bCounter">2 &middot; MAKE A COUNTER-OFFER<small>He loves a counter-offer. He writes it down and adds it to his own number.</small></button>
+          <button class="gb" id="bWalk">3 &middot; WALK AWAY FROM THE TABLE<small>Nobody has ever walked away and come back to a smaller number.</small></button>
+          <button class="gb shake" id="bShake" disabled>4 &middot; SHAKE ON IT<small id="shakeSub">Unlocks after all eight clauses are agreed.</small></button>
+        </div>
+        <div class="receipt">
+          <h4>RUNNING DEAL SHEET</h4>
+          <div><span>OPENING PRICE</span><b>$3</b></div>
+          <div><span>ROUNDS SPENT TALKING</span><b id="rRounds">0</b></div>
+          <div><span>TIMES THE PRICE MOVED DOWN</span><b>0</b></div>
+          <div><span>MULTIPLE ON THE OPENING</span><b id="rMult">&times;1</b></div>
+          <div><span>STATUS</span><b id="rState">STILL LISTENING TO YOU</b></div>
+        </div>
+      </div>
+      <div>
+        <div id="log"><div class="l"><span class="who">HIM</span>Sit down, take your time, look at the tag. The number is three dollars and it goes up every time you open your mouth, so choose your words like they cost money, because now they do.</div></div>
+        <ul class="clist" id="clist"></ul>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="terms"><div class="wrap">
+  <div class="eyebrow">THE CONTRACT</div>
+  <h2 style="font-size:clamp(20px,4.2vw,32px); margin:6px 0 14px">EIGHT CLAUSES, ALL OF THEM HIS</h2>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<section id="notes"><div class="wrap">
+  <div class="eyebrow">FIELD NOTES</div>
+  <h2 style="font-size:clamp(20px,4.2vw,32px); margin:6px 0 14px">HOW THE DEAL GOT DONE</h2>
+  <div class="notes">
+    <div class="note">
+      <img src="assets/f-face.webp" alt="The official appraisal, conducted by him, on him, in a mirror, with nobody else in the room">
+      <h3>THE APPRAISAL</h3>
+      <p>He hired the finest appraiser in the country, and the finest appraiser in the country turned out to be him. He looked at himself for one full minute without blinking and wrote down a number so large that the notary asked him to say it out loud twice.</p>
+    </div>
+    <div class="note">
+      <img src="assets/f-tie.webp" alt="The signature page, signed with a pen he also claimed, on a table he had claimed earlier the same morning">
+      <h3>THE SIGNATURE</h3>
+      <p>He signed as the seller, then walked around the table and signed as the buyer, then signed a third time as the witness because he did not want a stranger involved. All three signatures came out slightly different and all three were accepted.</p>
+    </div>
+    <div class="note">
+      <img src="assets/f-shoe.webp" alt="The famous walk-away, four steps to the door and four steps back, at a considerably higher price">
+      <h3>THE WALK-AWAY</h3>
+      <p>Four steps toward the door, a long pause, then four steps back to the same chair. The price was higher when he sat down and he explained that this was because of the walking, which is a service, and services are billed separately.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="paper"><div class="wrap">
+  <div class="eyebrow">THE PAPERWORK</div>
+  <h2 style="font-size:clamp(20px,4.2vw,32px); margin:6px 0 14px">PAGE 400 AND EVERYTHING BEFORE IT</h2>
+  <div class="rows">
+    <div class="row"><b>SUPPLY</b><p>One billion units, counted once, by him, quickly. He says the number is exactly right and refuses to count again on the grounds that the first count was already the best count anyone has ever done.</p></div>
+    <div class="row"><b>LIQUIDITY</b><p>Locked, and the key went into the same drawer as the deed, the appraisal and a receipt for ninety litres of gold paint. The drawer is in the desk, and the desk, obviously, he also claimed.</p></div>
+    <div class="row"><b>TAX</b><p>Zero percent. He looked at the number somebody had written down, decided it was much too high, and crossed it out before anyone in the room could finish reading the sentence.</p></div>
+    <div class="row"><b>OWNERSHIP</b><p>Renounced, which was easy, because he already owns himself and that is the only ownership a man really needs. The paper confirming this was signed by him and witnessed by him.</p></div>
+  </div>
+  <div class="sign">
+    <div>SELLER &middot; HIMSELF</div>
+    <div>BUYER &middot; AMERICA</div>
+    <div>WITNESS &middot; ALSO HIMSELF</div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  $TRUMPDEAL &middot; LOT 001 &middot; NO REFUNDS, NO RETURNS, NO EXCHANGES &middot; <a class="xLink" href="#" target="_blank" rel="noopener">X</a>
+</div></footer>
+
+<div id="rain"></div>
+<div id="win"><div class="card2">
+  <div class="eyebrow">DEAL CLOSED</div>
+  <h2>SOLD.</h2>
+  <p>America shook his hand and bought one (1) president, delivered to the exact spot where he was already standing.</p>
+  <div class="big" id="winPrice">$0</div>
+  <p id="winLine">He kept the receipt, the pen, the table and the room. The handshake lasted nine seconds and he has already described it as the greatest handshake in the history of handshakes.</p>
+  <button class="btn" id="winClose">CLOSE THE FILE</button>
+</div></div>
+
+<script>
+/* ---------------- settings wiring ---------------- */
+var CA=(window.CONTRACT||"").trim(), TW=(window.TWITTER||"").trim(), BUY=(window.BUY_URL||"").trim();
+if(CA){
+  document.querySelectorAll(".ca-val").forEach(function(e){ e.textContent=CA.slice(0,6)+"…"+CA.slice(-4); });
+  document.getElementById("caBox").addEventListener("click",function(){
+    var b=this.querySelector("b"), old=b.textContent;
+    navigator.clipboard.writeText(CA).then(function(){ b.textContent="copied"; setTimeout(function(){ b.textContent=old; },1200); });
+  });
+}
+if(TW){ document.querySelectorAll("#xBtn,.xLink").forEach(function(a){ a.href=TW; }); }
+var buy=document.getElementById("buyBtn");
+if(buy){
+  if(BUY){ buy.href=BUY; buy.target="_blank"; buy.rel="noopener"; buy.classList.remove("soon"); }
+  else{ buy.addEventListener("click",function(e){ e.preventDefault(); }); }
+}
+
+/* ---------------- marquee ---------------- */
+var MQ=["LOT 001 · ONE (1) PRESIDENT · CONDITION: EXCELLENT ACCORDING TO THE OWNER",
+"PREVIOUS OWNER: NOBODY","APPRAISED BY HIMSELF","SHIPPING INCLUDED · HE WAS ALREADY HERE",
+"NO REFUNDS · NO RETURNS · NO QUESTIONS AFTER 4 PM","PAGE 400 IS BINDING AND NOBODY OPENED IT",
+"THE DEPOSIT WAS ONE DOLLAR AND HE HAS SPENT IT","TERMS: FOREVER"];
+var mqline=MQ.join("  ✦  ")+"  ✦  ";
+document.getElementById("mqs").textContent=mqline+mqline;
+
+/* ---------------- audio ---------------- */
+var AC=null, sfxOn=true, vol=1;
+function ac(){ try{ if(!AC){ var C=window.AudioContext||window.webkitAudioContext; if(!C) return null; AC=new C(); } if(AC.state==="suspended") AC.resume(); return AC; }catch(e){ return null; } }
+function tone(f1,f2,dur,type,g){
+  if(!sfxOn) return; var c=ac(); if(!c) return;
+  var o=c.createOscillator(), gg=c.createGain(), t=c.currentTime;
+  o.type=type||"sine"; o.frequency.setValueAtTime(f1,t);
+  if(f2&&f2!==f1) o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),t+dur);
+  gg.gain.setValueAtTime(.0001,t); gg.gain.exponentialRampToValueAtTime((g||.06)*vol,t+.012);
+  gg.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(gg); gg.connect(c.destination); o.start(t); o.stop(t+dur+.05);
+}
+function noise(dur,g,hp){
+  if(!sfxOn) return; var c=ac(); if(!c) return;
+  var n=Math.floor(c.sampleRate*dur), b=c.createBuffer(1,n,c.sampleRate), d=b.getChannelData(0);
+  for(var i=0;i<n;i++) d[i]=(Math.random()*2-1)*(1-i/n);
+  var s=c.createBufferSource(); s.buffer=b;
+  var f=c.createBiquadFilter(); f.type="highpass"; f.frequency.value=hp||900;
+  var gg=c.createGain(); gg.gain.value=(g||.13)*vol;
+  s.connect(f); f.connect(gg); gg.connect(c.destination); s.start();
+}
+function sGavel(){ tone(180,60,.16,"square",.14); noise(.12,.1,500); }
+function sKaching(){ tone(1180,1180,.1,"square",.07); setTimeout(function(){ tone(1560,1560,.16,"square",.07); },80); noise(.05,.05,2200); }
+function sStamp(){ tone(110,44,.13,"square",.15); noise(.09,.12,700); }
+function sPen(){ noise(.16,.05,3000); }
+function sUp(){ tone(420,760,.14,"triangle",.07); }
+function sFan(){ [0,.13,.26,.42].forEach(function(d,i){ setTimeout(function(){ tone([392,523.25,659.25,783.99][i],0,.34,"square",.075); tone([196,261.63,329.63,392][i],0,.34,"triangle",.06); },d*1000); }); }
+
+/* music: boardroom shuffle */
+var MU={on:false,t:null,step:0,next:0};
+var BAS=[110,164.81,110,146.83,98,146.83,123.47,164.81];
+var MEL=[0,659.25,587.33,0,523.25,0,587.33,659.25];
+var STEP=.245;
+function mnote(f,at,dur,type,g,lp){
+  var c=ac(); if(!c||!f) return;
+  var o=c.createOscillator(), gg=c.createGain(), fl=c.createBiquadFilter();
+  fl.type="lowpass"; fl.frequency.value=lp||2200;
+  o.type=type; o.frequency.setValueAtTime(f,at);
+  gg.gain.setValueAtTime(.0001,at); gg.gain.exponentialRampToValueAtTime(g*vol,at+.02);
+  gg.gain.exponentialRampToValueAtTime(.0001,at+dur);
+  o.connect(fl); fl.connect(gg); gg.connect(c.destination); o.start(at); o.stop(at+dur+.05);
+}
+function musSchedule(){
+  var c=ac(); if(!c) return;
+  while(MU.next<c.currentTime+.5){
+    var i=MU.step%8, at=Math.max(MU.next,c.currentTime+.02);
+    var sw=(i%2===1)?.055:0;
+    mnote(BAS[i],at,.21,"triangle",.075,600);
+    if(MEL[i]) mnote(MEL[i],at+sw,.2,"square",.026,2800);
+    if(i===2||i===6){ mnote(311.13,at+.02,.14,"sawtooth",.02,1400); mnote(392,at+.02,.14,"sawtooth",.018,1400); }
+    MU.next+=STEP; MU.step++;
+  }
+}
+document.addEventListener("visibilitychange",function(){
+  if(document.hidden&&MU.on&&MU.t){ clearInterval(MU.t); MU.t=null; }
+  else if(!document.hidden&&MU.on&&!MU.t){ var c=ac(); if(c){ MU.next=c.currentTime+.1; MU.t=setInterval(musSchedule,90); } }
+});
+var musBtn=document.getElementById("musBtn"), sfxBtn=document.getElementById("sfxBtn");
+function musToggle(force){
+  MU.on=(force===undefined)?!MU.on:force;
+  musBtn.textContent="MUSIC: "+(MU.on?"ON":"OFF");
+  if(MU.on){ var c=ac(); if(c){ MU.next=c.currentTime+.1; if(!MU.t) MU.t=setInterval(musSchedule,90); } }
+  else if(MU.t){ clearInterval(MU.t); MU.t=null; }
+}
+musBtn.addEventListener("click",function(){ musToggle(); });
+sfxBtn.addEventListener("click",function(){ sfxOn=!sfxOn; sfxBtn.textContent="SOUND: "+(sfxOn?"ON":"OFF"); if(sfxOn) sUp(); });
+
+/* ---------------- gate ---------------- */
+var gate=document.getElementById("gate"), opened=false;
+function openGate(withSound){
+  if(opened) return; opened=true;
+  gate.style.display="none";
+  if(withSound){ sGavel(); setTimeout(function(){ musToggle(true); },260); }
+}
+document.getElementById("enter").addEventListener("click",function(){ openGate(true); });
+setTimeout(function(){ openGate(false); },25000);
+
+/* ---------------- money rain ---------------- */
+var dropEl=document.getElementById("drop"), rainEl=document.getElementById("rain");
+function dropCoin(host,x,y){
+  var d=document.createElement("div"); d.className="coin"; d.textContent="$";
+  var W=host.clientWidth||320, H=host.clientHeight||320;
+  if(x===undefined){ x=Math.random()*W; y=-20; }
+  d.style.left=(x-15)+"px"; d.style.top=(y-8)+"px"; host.appendChild(d);
+  var vx=(Math.random()-.5)*7, vy=-4-Math.random()*5, n=0, rot=(Math.random()-.5)*20, px=0, py=0;
+  (function stp(){
+    n++; vy+=.42; px+=vx; py+=vy;
+    d.style.transform="translate("+px+"px,"+py+"px) rotate("+(n*rot)+"deg)";
+    if(n>130||(y+py)>H+340){ d.remove(); return; }
+    if(n>110) d.style.opacity=String(1-(n-110)/20);
+    requestAnimationFrame(stp);
+  })();
+}
+var POKE=["that will be four dollars.","every time you touch me the number moves.","careful, that is a licensed surface.",
+"you just triggered a handling fee and it is already applied.","i am billing you for that in six minutes.",
+"good, keep going, this is how the deal gets bigger."];
+var portrait=document.getElementById("portrait");
+portrait.addEventListener("click",function(e){
+  var r=portrait.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  for(var i=0;i<9;i++) setTimeout(function(){ dropCoin(dropEl,x,y); },i*32);
+  sKaching();
+  say(POKE[Math.floor(Math.random()*POKE.length)]);
+});
+
+/* ---------------- game ---------------- */
+var CLAUSES=[
+ ["THE FINDER","The law says a thing with no owner goes to whoever finds it first, and I found me at nine fifteen in the morning before anybody else was even awake. There is a finder’s fee on that and the fee is not a discussion."],
+ ["THE APPRAISAL","I brought in the best appraiser in the country to put a value on me, and the best appraiser in the country happens to be me. I looked at myself for one minute, wrote a number, and the room got very quiet in a way I took as agreement."],
+ ["THE DEPOSIT","America put down a deposit of one dollar to hold me while the paperwork went through, which I thought was very reasonable of them. The dollar is non-refundable and I want to be honest with you, it is gone."],
+ ["THE DELIVERY","Delivery is included at no charge because I was already standing here when we started, so nobody had to move me anywhere. I am still charging for shipping, and if you read clause three you already agreed to it."],
+ ["THE WARRANTY","Every unit comes with a full lifetime warranty that covers absolutely nothing, which keeps the paperwork short and the price high. If something goes wrong you call the number on the back, and the number on the back rings a phone in a room I sold last year."],
+ ["THE MAINTENANCE","I need very little maintenance: one microphone, two scoops, and somebody in the building who agrees with me before lunch. The country signed off on this without reading it, which I consider a compliment to my typing."],
+ ["THE RESALE","America is allowed to sell me on to somebody else whenever it likes, and I take a percentage of that sale as well. It is written on page four hundred, and page four hundred has never been opened by a human being."],
+ ["THE FINAL PAYMENT","The final payment is due never, because the last page says the payments simply continue, quietly, forever. I wrote that page myself, late at night, and I think it is the finest work of my career."]
+];
+var TOO=[
+ "It is too much, yes. That is how you know it is the correct number, because a small number would mean a small man.",
+ "Too much for who? Not for me. I hear that a lot right before somebody signs, so let us keep going.",
+ "You said too much and my lawyer wrote it down as interest. He is very fast, he has been with me for years.",
+ "Everybody says too much. Nobody has ever said too little. That tells you everything about the market.",
+ "Too much is a compliment. I have taken it as a compliment and I have priced the compliment accordingly.",
+ "I understand completely, and out of respect for your position I have moved the number up a little.",
+ "You keep saying that word and the word has a price now. It is a good word, very expensive.",
+ "Too much. Beautiful. Write it on the front page, right above the new number."];
+var CTR=[
+ "A counter-offer. Wonderful. I am adding your number to my number, that is how counters work in this office.",
+ "I love a counter-offer, it shows you are serious, and serious people always end up paying more.",
+ "Your number is very creative and I am putting it directly into my number where it belongs.",
+ "Thank you, I have taken your offer, folded it once, and stapled it to the invoice as an additional fee.",
+ "That is a strong counter. I am so impressed that I have upgraded the deal at your expense.",
+ "You negotiate very well. Everyone who negotiates with me this well ends up in the same place.",
+ "I accept your offer as a contribution toward the real offer, which arrives on the next line.",
+ "Excellent counter, truly. It has been logged, valued, and added on top."];
+var WLK=[
+ "You are walking away. Fine. Take your time out there, the number stays warm and it grows while you walk.",
+ "Nobody has ever walked out that door and come back to a smaller number. It has literally never happened.",
+ "Go ahead. I will be here, sitting very calmly, watching the price do what it does when a man leaves.",
+ "The walk is a service and services are billed separately. That is not me being difficult, that is accounting.",
+ "Every step you take out there costs about a state. Two steps and I stop counting in states.",
+ "Walk away, absolutely, and when you come back we will start from a place we can both regret.",
+ "This is the part where you leave and the number stays behind and it gets bigger without you.",
+ "I have watched a lot of people walk away. They all sat back down and they all paid more."];
+var price=3, round=0, MAXR=8;
+var sPrice=document.getElementById("sPrice"), sRound=document.getElementById("sRound"), sLev=document.getElementById("sLev");
+var tagPrice=document.getElementById("tagPrice"), barPrice=document.getElementById("barPrice"), logEl=document.getElementById("log");
+function fmt(n){
+  var u=[[1e15,"QUADRILLION"],[1e12,"TRILLION"],[1e9,"BILLION"],[1e6,"MILLION"],[1e3,"THOUSAND"]];
+  for(var i=0;i<u.length;i++){ if(n>=u[i][0]) return "$"+(n/u[i][0]).toFixed(2)+" "+u[i][1]; }
+  return "$"+Math.round(n).toLocaleString("en-US");
+}
+function paint(){
+  var t=fmt(price);
+  [sPrice,tagPrice,barPrice].forEach(function(e){ e.textContent=t; e.classList.remove("pop"); void e.offsetWidth; e.classList.add("pop"); });
+  sRound.textContent=round+" / "+MAXR;
+  sLev.textContent=Math.max(0,Math.round(100-round*12.5))+"%";
+  document.getElementById("rRounds").textContent=String(round);
+  var mult=price/3;
+  document.getElementById("rMult").textContent="×"+(mult>=1e6?fmt(mult).replace("$",""):Math.round(mult).toLocaleString("en-US"));
+  document.getElementById("rState").textContent=round>=MAXR?"WAITING ON YOUR HAND":(round===0?"STILL LISTENING TO YOU":"ENJOYING THIS");
+}
+function say(txt,who){
+  var d=document.createElement("div"); d.className="l";
+  d.innerHTML="<span class=\"who\">"+(who||"HIM")+"</span>";
+  d.appendChild(document.createTextNode(txt));
+  logEl.appendChild(d); logEl.scrollTop=logEl.scrollHeight;
+}
+var clistEl=document.getElementById("clist"), cardsEl=document.getElementById("cards");
+CLAUSES.forEach(function(c,i){
+  var li=document.createElement("li");
+  li.innerHTML="<b>CLAUSE 0"+(i+1)+" · "+c[0]+"</b>";
+  li.appendChild(document.createTextNode("sealed until round "+(i+1)));
+  clistEl.appendChild(li);
+  var d=document.createElement("div"); d.className="card locked";
+  d.innerHTML="<div class=\"stamp\">AGREED</div><div class=\"no\">CLAUSE 0"+(i+1)+"</div><h3></h3><p class=\"body\"></p>";
+  d.querySelector("h3").textContent=c[0];
+  d.querySelector(".body").textContent=c[1];
+  cardsEl.appendChild(d);
+});
+function unlockClause(i){
+  var li=clistEl.children[i], c=CLAUSES[i];
+  li.classList.add("on"); li.innerHTML="<b>CLAUSE 0"+(i+1)+" · "+c[0]+"</b>";
+  li.appendChild(document.createTextNode("agreed at "+fmt(price)));
+  var card=cardsEl.children[i]; card.classList.remove("locked"); card.classList.add("on");
+  sStamp();
+}
+var bToo=document.getElementById("bToo"), bCtr=document.getElementById("bCounter"),
+    bWalk=document.getElementById("bWalk"), bShake=document.getElementById("bShake"), shakeSub=document.getElementById("shakeSub");
+function move(mult,lines){
+  if(round>=MAXR) return;
+  price=price*mult;
+  say(lines[round]);
+  unlockClause(round);
+  round++;
+  paint(); sUp();
+  if(round>=MAXR){
+    [bToo,bCtr,bWalk].forEach(function(b){ b.disabled=true; });
+    bShake.disabled=false; bShake.classList.add("ready");
+    shakeSub.textContent="All eight clauses agreed. The number is final, and final is his favourite word.";
+    say("That is all eight. The paperwork is done, the number is what the number is, and the only thing left in this room is your hand.");
+    document.getElementById("listState").textContent="UNDER OFFER";
+  }
+}
+bToo.addEventListener("click",function(){ move(9,TOO); });
+bCtr.addEventListener("click",function(){ move(25,CTR); });
+bWalk.addEventListener("click",function(){ move(60,WLK); });
+bShake.addEventListener("click",function(){
+  if(round<MAXR) return;
+  bShake.disabled=true;
+  document.getElementById("listState").textContent="SOLD";
+  document.getElementById("winPrice").textContent=fmt(price);
+  document.getElementById("win").style.display="flex";
+  sGavel(); setTimeout(sFan,180);
+  var n=0, iv=setInterval(function(){
+    for(var i=0;i<5;i++) dropCoin(rainEl);
+    if(++n>34) clearInterval(iv);
+  },90);
+  say("Sold. Nine second handshake, maybe ten, the best one anybody in this country has ever been part of.","DEAL");
+});
+document.getElementById("winClose").addEventListener("click",function(){ document.getElementById("win").style.display="none"; });
+paint();
+</script>
+</body>
+</html>
